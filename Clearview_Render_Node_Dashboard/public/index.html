@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <meta name="description" content="Clearview — your personal workspace dashboard.">
+  <title>Clearview — Workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="auth-shell" id="authShell">
+    <section class="auth-brand">
+      <a class="brand" href="/" aria-label="Clearview home"><span class="brand-mark">C</span><span>clearview</span></a>
+      <div class="brand-copy">
+        <span class="eyebrow">YOUR SPACE, IN FOCUS</span>
+        <h1>A clearer view<br>of your work.</h1>
+        <p>A calm, focused workspace to keep your account and activity in one place.</p>
+      </div>
+      <div class="brand-foot"><span class="status-dot"></span> A little more clarity, every day.</div>
+      <div class="decor decor-one"></div><div class="decor decor-two"></div>
+    </section>
+    <section class="auth-main">
+      <div class="auth-card">
+        <div class="mobile-brand"><span class="brand-mark">C</span> clearview</div>
+        <div class="auth-heading">
+          <span class="eyebrow" id="formEyebrow">WELCOME BACK</span>
+          <h2 id="formTitle">Sign in to your space</h2>
+          <p id="formSubtitle">Pick up right where you left off.</p>
+        </div>
+        <div class="form-alert" id="formAlert" role="alert" hidden></div>
+        <form id="loginForm" class="auth-form">
+          <label for="loginEmail">Email address</label>
+          <input id="loginEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required>
+          <div class="label-row"><label for="loginPassword">Password</label><span class="muted-small">10+ characters</span></div>
+          <input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" maxlength="72" required>
+          <button class="primary-btn" type="submit"><span>Sign in</span><span aria-hidden="true">↗</span></button>
+        </form>
+        <form id="registerForm" class="auth-form" hidden>
+          <label for="registerName">Your name</label>
+          <input id="registerName" name="displayName" type="text" autocomplete="name" placeholder="Alex Morgan" minlength="2" maxlength="60" required>
+          <label for="registerEmail">Email address</label>
+          <input id="registerEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required>
+          <label for="registerPassword">Create a password</label>
+          <input id="registerPassword" name="password" type="password" autocomplete="new-password" placeholder="At least 10 characters" minlength="10" maxlength="72" required>
+          <button class="primary-btn" type="submit"><span>Create account</span><span aria-hidden="true">↗</span></button>
+        </form>
+        <p class="auth-switch" id="authSwitch">New to Clearview? <button type="button" class="text-btn" id="showRegister">Create an account</button></p>
+        <p class="legal-note">By continuing, you agree to use this workspace responsibly.</p>
+      </div>
+      <span class="copyright">© <span id="year"></span> Clearview Workspace</span>
+    </section>
+  </div>
+
+  <div class="app-shell" id="appShell" hidden>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand sidebar-brand" href="#"><span class="brand-mark">C</span><span>clearview</span></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <button class="nav-item active" data-page="overview"><span class="nav-icon">▦</span> Overview</button>
+        <button class="nav-item" data-page="activity"><span class="nav-icon">◷</span> Activity</button>
+        <button class="nav-item" data-page="settings"><span class="nav-icon">⚙</span> Settings</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><span class="help-icon">✦</span><strong>Your space, your pace.</strong><p>This is your personal workspace. More tools can be added as your needs grow.</p></div>
+        <button class="user-mini" id="sidebarUser"><span class="avatar" id="sidebarAvatar">U</span><span class="user-mini-text"><strong id="sidebarName">User</strong><small id="sidebarEmail">user@example.com</small></span><span class="dots">···</span></button>
+      </div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Toggle navigation">☰</button>
+        <div class="breadcrumbs">Workspace <span>/</span> <strong id="breadcrumbPage">Overview</strong></div>
+        <div class="topbar-right"><span class="online-pill"><span class="status-dot"></span> All systems normal</span><button class="top-avatar" id="topAvatar" aria-label="Account menu">U</button></div>
+      </header>
+      <div class="page-wrap">
+        <section class="page active-page" id="page-overview">
+          <div class="welcome-row"><div><span class="eyebrow">YOUR WORKSPACE</span><h1>Good to see you, <span id="welcomeName">there</span><span class="wave">✳</span></h1><p>Here’s what’s happening with your account today.</p></div><div class="today-chip"><span>◷</span><span id="todayDate"></span></div></div>
+          <div class="stats-grid" id="statsGrid"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
+          <div class="content-grid">
+            <section class="panel activity-panel"><div class="panel-heading"><div><h2>Recent activity</h2><p>A quick look at your workspace</p></div><button class="subtle-btn" data-go="activity">View all <span>↗</span></button></div><div id="overviewActivity" class="activity-list"></div></section>
+            <section class="panel quick-panel"><div class="panel-heading"><div><h2>Quick settings</h2><p>Make this space yours</p></div><span class="panel-icon">⚙</span></div><button class="quick-setting" data-go="settings"><span class="quick-setting-icon lavender">◉</span><span><strong>Personal preferences</strong><small>Adjust how your workspace feels</small></span><span class="arrow">›</span></button><div class="quick-note"><span class="note-spark">✦</span><div><strong>Keep it simple.</strong><p>Your dashboard is ready. Add features as your workflow takes shape.</p></div></div></section>
+          </div>
+        </section>
+        <section class="page" id="page-activity">
+          <div class="page-title"><span class="eyebrow">YOUR TIMELINE</span><h1>Activity</h1><p>A record of important events in your workspace.</p></div>
+          <section class="panel"><div class="panel-heading"><div><h2>Recent events</h2><p>Events associated with your account</p></div></div><div id="allActivity" class="activity-list"></div></section>
+        </section>
+        <section class="page" id="page-settings">
+          <div class="page-title"><span class="eyebrow">MAKE IT YOURS</span><h1>Settings</h1><p>Manage your workspace preferences.</p></div>
+          <section class="panel settings-panel"><div class="panel-heading"><div><h2>Preferences</h2><p>Your changes are saved to your account.</p></div></div>
+            <form id="settingsForm">
+              <label class="setting-row"><span><strong>Email notifications</strong><small>Allow helpful account and product updates.</small></span><input type="checkbox" id="emailNotifications" class="toggle"><span class="toggle-ui"></span></label>
+              <label class="setting-row"><span><strong>Compact mode</strong><small>Use a tighter layout with less spacing.</small></span><input type="checkbox" id="compactMode" class="toggle"><span class="toggle-ui"></span></label>
+              <div class="settings-actions"><span id="settingsMessage" class="muted-small" aria-live="polite"></span><button class="primary-btn save-btn" type="submit">Save preferences <span>↗</span></button></div>
+            </form>
+          </section>
+          <section class="panel account-panel"><div class="panel-heading"><div><h2>Account</h2><p>Your sign-in details</p></div></div><div class="account-detail"><span class="detail-icon">✉</span><div><small>Email address</small><strong id="settingsEmail"></strong></div></div><button class="secondary-btn" id="logoutSettings">Sign out of your account</button></section>
+        </section>
+      </div>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+</body>
+</html>
